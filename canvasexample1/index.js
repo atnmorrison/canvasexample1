@@ -63,7 +63,7 @@ app.post('/', passport.authenticate('sf-signed-post-request'), function(req, res
 });
 
 app.get('/', passport.authenticate('sf-signed-post-request'), function(req, res){
-    res.render('home', {name: req.session.sr});
+    res.render('home', {name: req.session.sr.context.user.firstName+" "+req.session.sr.context.user.lastName});
 });
 
 
