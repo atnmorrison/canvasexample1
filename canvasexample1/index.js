@@ -37,7 +37,10 @@ if(process.env.REDISTOGO_URL) {
     app.use(session({secret:'1AB4BUCH!ED', resave: true, saveUninitialized: true, cookie: { expires: 360000, secure: true,  proxy: true, sameSite: "None"}}));
 }
 
-passport.use('sf-signed-post-request', new sfsprStrategy(process.env.CANVAS_SECRET));
+passport.use('sf-signed-post-request', new sfsprStrategy(process.env.CANVAS_SECRET, function(sr, req){
+    req.session.sr = sr; 
+}));
+
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
